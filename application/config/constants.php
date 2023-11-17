@@ -1,4 +1,26 @@
 <?php
+
+if (isset($_SERVER['SERVER_PORT'])) {
+    $isHttps = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    $port = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : ($isHttps ? 443 : 80);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Base URL
+    |--------------------------------------------------------------------------
+    */
+    define('BASE_URL',
+        ($isHttps ? 'https' : 'http') . "://" . $_SERVER['SERVER_NAME'] . ':' . $port . str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']));
+
+    /*
+    |--------------------------------------------------------------------------
+    | Current URL
+    |--------------------------------------------------------------------------
+    */
+    define('CURRENT_URL', ($isHttps ? 'https' : 'http') . "://" . $_SERVER['SERVER_NAME'] . str_replace('//', '/', $_SERVER['REQUEST_URI']));
+}
+
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
