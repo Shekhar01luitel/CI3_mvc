@@ -1,236 +1,103 @@
-# CI3_mvc
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
+[![Latest Stable Version](https://poser.pugx.org/ivantcholakov/codeigniter-phpmailer/v)](//packagist.org/packages/ivantcholakov/codeigniter-phpmailer)
+[![Total Downloads](https://poser.pugx.org/ivantcholakov/codeigniter-phpmailer/downloads)](//packagist.org/packages/ivantcholakov/codeigniter-phpmailer)
+[![Latest Unstable Version](https://poser.pugx.org/ivantcholakov/codeigniter-phpmailer/v/unstable)](//packagist.org/packages/ivantcholakov/codeigniter-phpmailer)
+[![License](https://poser.pugx.org/ivantcholakov/codeigniter-phpmailer/license)](//packagist.org/packages/ivantcholakov/codeigniter-phpmailer)
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+A CodeIgniter compatible email-library powered by PHPMailer
+===========================================================
 
+Version: 1.5.0  
+Author: Ivan Tcholakov <ivantcholakov@gmail.com>, 2012-2022.  
+License: The MIT License (MIT), http://opensource.org/licenses/MIT
 
+This library is compatible with CodeIgniter 3.1.x and PHP >= 7.3.0.
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+Tested on CodeIgniter 3.1.13 (March 3rd, 2022) and PHPMailer Version 6.6.4 (August 22nd, 2022).
 
-  <h3 align="center">CI3 Project</h3>
+Links
+-----
 
-  <p align="center">
-    CodeIgniter 3 Basic Prject!
-    <br />
-    <a href="https://github.com/Shekar01luitel"><strong>Explore me »</strong></a>
-  </p>
-</div>
-
-
+Package: https://packagist.org/packages/ivantcholakov/codeigniter-phpmailer
 
-<!-- TABLE OF CONTENTS -->
-<!-- <details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details> -->
+PHPMailer: https://github.com/PHPMailer/PHPMailer
 
+Installation
+------------
 
+Enable Composer to be used by CodeIgniter. Check this page from its documentation:
+https://www.codeigniter.com/userguide3/general/autoloader.html .
+You need to see or decide when your vendor/ directory is (to be) and within the
+CodeIgniter's configuration file application/config/config.php you need to set the
+configuration option $config['composer_autoload'] accordingly. For the typical location
+application/vendor/ the configuration setting would look like this:
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+```php
+$config['composer_autoload'] = APPPATH.'vendor/autoload.php';
+```
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Within application/config/constants.php add the following lines:
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+```php
+// Path to Composer's vendor/ directory, it should end with a trailing slash.
+defined('VENDORPATH') OR define('VENDORPATH', rtrim(str_replace('\\', '/', realpath(dirname(APPPATH.'vendor/autoload.php'))), '/').'/');
+```
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+It is assumed that Composer's vendor/ directory is placed under CodeIgniter's
+application/ directory. Otherwise correct the setting so VENDORPATH to point correctly.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+If PHPMailer was previously installed through Composer, uninstall it temporarily:
 
-Use the `BLANK_README.md` to get started.
+```
+composer remove PHPMailer/PHPMailer
+```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Now install this library's package, it will install a correct version of PHPMailer too:
 
+```
+composer require ivantcholakov/codeigniter-phpmailer
+```
 
+Create a file application/helpers/MY_email_helper.php with the following content:
 
-### Built With
+```php
+<?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+// A place where you can move your custom helper functions,
+// that are to be loaded before the functions below.
+// If it is needed, create the corresponding file, insert
+// your source there and uncomment the following lines.
+//if (is_file(dirname(__FILE__).'/MY_email_helper_0.php')) {
+//    require_once dirname(__FILE__).'/MY_email_helper_0.php';
+//}
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+// Instead of copying manually or through script in this directory,
+// let us just load here the provided by Composer file.
+if (is_file(VENDORPATH.'ivantcholakov/codeigniter-phpmailer/helpers/MY_email_helper.php')) {
+    require_once VENDORPATH.'ivantcholakov/codeigniter-phpmailer/helpers/MY_email_helper.php';
+}
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+// A place where you can move your custom helper functions,
+// that are to be loaded after the functions above.
+// If it is needed, create the corresponding file, insert
+// your source there and uncomment the following lines.
+//if (is_file(dirname(__FILE__).'/MY_email_helper_2.php')) {
+//    require_once dirname(__FILE__).'/MY_email_helper_2.php';
+//}
+```
 
+Create a file application/libraries/MY_Email.php with the following content:
 
+```php
+<?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
-<!-- GETTING STARTED -->
-## Getting Started
+// Instead of copying manually or through script in this directory,
+// let us just load here the provided by Composer file.
+require_once VENDORPATH.'ivantcholakov/codeigniter-phpmailer/libraries/MY_Email.php';
+```
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is an installation that is to be done once. Updating to next versions of
+this package and PHPMailer would be done later easily:
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[linkedin-url]: https://linkedin.com/in/shekhar-luitel33
+```
+composer update
+```
