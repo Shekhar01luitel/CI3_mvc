@@ -3,7 +3,7 @@
     <div class="card">
         <?php include(APPPATH . 'views/ecommerce/partials/alertMsg.php') ?>
         <div class="card-body p-5">
-            <form action="<?= base_url('login_controller/Login/process_login') ?>" method="post">
+            <form action="<?= base_url('ecommerce/login/Sign_in/process_login') ?>" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label">Your Email:</label>
                     <input type="email" id="email" name="email" class="form-control" required>

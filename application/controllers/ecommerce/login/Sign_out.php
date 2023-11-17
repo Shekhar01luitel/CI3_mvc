@@ -10,7 +10,18 @@ class Sign_out extends MY_Controller
 
 	public function index()
 	{
-		$this->load->view('login/registration');
+        $head = array();
+		$navbar = array();
+        $head['title'] = 'Ecommerce-register';
+        if(! $this->session->userdata('user_id')){
+            $navbar['data'] = ['login'];
+        }else{
+            $navbar['data'] = ['logout'];
+        }
+		$this->load->view('parts/header', $head);
+		$this->load->view('ecommerce/parts/navbar', $navbar);
+		$this->load->view('ecommerce/login/sign_out');
+		$this->load->view('parts/footer');
 	}
 	public function process_registration()
 	{

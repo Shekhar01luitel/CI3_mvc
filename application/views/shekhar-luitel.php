@@ -16,7 +16,7 @@
 			<div class="row text-center">
 				<div class="col-md-4">
 					<span class="fa-stack fa-4x">
-						<a href=""><i class="fas fa-circle fa-stack-2x text-primary"></i></a>
+						<a href="<?=base_url('ecommerce/login')?>"><i class="fas fa-circle fa-stack-2x text-primary"></i></a>
 						<i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
 					</span>
 					<h4 class="my-3">E-Commerce</h4>

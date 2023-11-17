@@ -52,4 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Shekhar';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['ecommerce'] = 'shekhar';
+
+$route['ecommerce/login'] = 'ecommerce/login/sign_in';
+$route['ecommerce/register'] = 'ecommerce/login/sign_out';
+$route['logout'] = 'ecommerce/login/sign_in/logout';
+
+$route['dashboard']= 'ecommerce/dashboard/dashboard';

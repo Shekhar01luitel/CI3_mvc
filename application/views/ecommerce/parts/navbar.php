@@ -10,7 +10,7 @@
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                 <?php
                 foreach($data as $navbar=>$value){?>
-                    <li class="nav-item"><a class="nav-link text-info" href="<?=base_url(lcfirst($value))?>"><?= ($value)?></a></li>
+                    <li class="nav-item"><a class="nav-link text-info" href="<?=base_url(lcfirst('ecommerce/'.$value))?>"><?= ($value)?></a></li>
                <?php }
                 ?>
             </ul>
