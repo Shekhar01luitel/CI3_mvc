@@ -2,8 +2,7 @@ A CodeIgniter Simple Crud
 ===========================================================
 
 Version: 1.0  
-Author: Shekhar Luitel <shekharluitel.com.np>.  
-License: The MIT License (MIT), http://opensource.org/licenses/MIT
+Author: Shekhar Luitel https://shekharluitel.com.np.  
 
 This library is compatible with CodeIgniter 3.1.x and PHP >= 7.3.0.
 
@@ -17,16 +16,54 @@ Package: https://packagist.org/packages/ivantcholakov/codeigniter-phpmailer
 Installation
 ------------
 
-Enable Composer to be used by CodeIgniter. Check this page from its documentation:
-https://www.codeigniter.com/userguide3/general/autoloader.html .
-You need to see or decide when your vendor/ directory is (to be) and within the
-CodeIgniter's configuration file application/config/config.php you need to set the
-configuration option $config['composer_autoload'] accordingly. For the typical location
-application/vendor/ the configuration setting would look like this:
+Download Codeignioter 3 project https://codeload.github.com/bcit-ci/CodeIgniter/zip/3.1.13
+
+Open config/config.php
 
 ```php
-$config['composer_autoload'] = APPPATH.'vendor/autoload.php';
+$config['base_url'] = defined('BASE_URL')?BASE_URL:'';
 ```
+Open config/constant.php
+
+```php
+<?php
+
+if (isset($_SERVER['SERVER_PORT'])) {
+    $isHttps = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    $port = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : ($isHttps ? 443 : 80);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Base URL
+    |--------------------------------------------------------------------------
+    */
+    define('BASE_URL',
+        ($isHttps ? 'https' : 'http') . "://" . $_SERVER['SERVER_NAME'] . ':' . $port . str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']));
+
+    /*
+    |--------------------------------------------------------------------------
+    | Current URL
+    |--------------------------------------------------------------------------
+    */
+    define('CURRENT_URL', ($isHttps ? 'https' : 'http') . "://" . $_SERVER['SERVER_NAME'] . str_replace('//', '/', $_SERVER['REQUEST_URI']));
+}
+
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/*
+|--------------------------------------------------------------------------
+| Display Debug backtrace
+|--------------------------------------------------------------------------TEMPLATES_DIR
+|
+| If set to TRUE, a backtrace will be displayed along with php errors. If
+| error_reporting is disabled, the backtrace will not display, regardless
+| of this setting
+|
+*/
+defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
+```
+
 
 Within application/config/constants.php add the following lines:
 
