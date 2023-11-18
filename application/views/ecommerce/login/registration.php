@@ -1,9 +1,9 @@
 <div class="container" style="margin-top: 7rem !important">
     <h2 class="text-center">Registration</h2>
     <div class="card">
-        <?php echo $this->session->flashdata('message'); ?>
+        <?php include(APPPATH . 'views/ecommerce/partials/alertMsg.php') ?>
         <div class="card-body p-5">
-            <form action="<?= base_url('login_controller/Registration/process_registration') ?>" method="post">
+            <form action="<?= base_url('ecommerce/login/registration/process_registration') ?>" method="post">
                 <div class="mb-3">
                     <label for="name" class="form-label">Your Name:</label>
                     <input type="text" id="name" name="name" class="form-control" required>
@@ -25,10 +25,8 @@
                     <label for="terms" class="form-check-label">I agree to the <a href="#">Terms of Service</a></label>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary">Registration</button>
                 </div>
-                <label for="terms" class="form-check-label">Already Register <a href="<?= base_url('login') ?>">Login</a></label>
-
             </form>
         </div>
     </div>

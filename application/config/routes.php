@@ -54,7 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['ecommerce/login'] = 'ecommerce/login/sign_in';
-$route['ecommerce/register'] = 'ecommerce/login/sign_out';
-$route['logout'] = 'ecommerce/login/sign_in/logout';
+$route['ecommerce/registration'] = 'ecommerce/login/registration';
+$route['ecommerce/logout'] = 'ecommerce/login/sign_out/logout';
 
-$route['dashboard']= 'ecommerce/dashboard/dashboard';
+$route['ecommerce/dashboard']= 'ecommerce/dashboard/dashboard';

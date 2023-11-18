@@ -8,6 +8,7 @@ class Sign_in extends MY_Controller
 		parent::__construct();
 		$this->load->model('Login_model'); // Load the model
 		$this->load->library('session');
+		$this->return_dashboard();
 	}
 	public function index()
 	{
@@ -15,7 +16,7 @@ class Sign_in extends MY_Controller
 		$navbar = array();
         $head['title'] = 'Ecommerce-login';
         if(! $this->session->userdata('user_id')){
-            $navbar['data'] = ['register'];
+            $navbar['data'] = ['registration'];
         }else{
             $navbar['data'] = ['logout'];
         }

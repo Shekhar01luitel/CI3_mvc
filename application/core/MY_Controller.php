@@ -21,7 +21,12 @@ class MY_Controller extends CI_Controller
         $user_role = $this->Role_model->get_role($user_id);
 
         if (!in_array($user_role, $allowed_roles)) {
-            redirect(base_url('logout'));
+            redirect(base_url('ecommerce/logout'));
+        }
+    }
+    protected function return_dashboard(){
+        if ($this->session->userdata('user_id')) {
+            redirect(base_url('ecommerce/dashboard'));
         }
     }
 }
