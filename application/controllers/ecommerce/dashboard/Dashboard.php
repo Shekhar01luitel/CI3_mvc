@@ -12,7 +12,15 @@ class Dashboard extends MY_Controller
 
 	public function index()
 	{
-		echo "hi";
-	}
+        $head = array();
+		$navbar = array();
+        $head['title'] = 'Ecommerce-Dashboard';
+        $navbar['data'] = ['user','logout'];
+        
+		$this->load->view('parts/header', $head);
+		$this->load->view('ecommerce/parts/navbar', $navbar);
+        $this->load->view('ecommerce/dashboard/dashoard');
+		$this->load->view('parts/footer');
+    }
 	
 }

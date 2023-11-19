@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller
     protected function is_user_loged_in()
     {
         if (!$this->session->userdata('user_id')) {
-            redirect(base_url('login'));
+            redirect(base_url('ecommerce/login'));
         }
     }
 
