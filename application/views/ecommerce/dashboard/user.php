@@ -1,6 +1,7 @@
 <div class="container" style="margin-top: 7rem !important">
     <div class="row">
         <div class="col-md-12 col-12 mx-auto">
+            <?php include(APPPATH . 'views/ecommerce/partials/alertMsg.php') ?>
             <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>

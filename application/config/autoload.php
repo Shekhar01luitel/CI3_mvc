@@ -133,3 +133,6 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array();
+
+
+$autoload['css'] = array('vendor/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStream.php');

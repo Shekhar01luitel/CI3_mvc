@@ -15,5 +15,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="<?=base_url('assets/next/css/styles.css')?>" rel="stylesheet" />
+	<!-- <link href="<?=base_url('application/views/dashboard/assets/css/styles.css')?>" rel="stylesheet" /> -->
+	<link href="<?=base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet" />
+	<!-- <link href="<?=base_url('assets/css/bootstrap-icons.css')?>" rel="stylesheet" /> -->
+
+
 </head>
 <body id="page-top">

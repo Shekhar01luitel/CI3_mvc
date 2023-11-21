@@ -6,7 +6,7 @@
 	<!-- * *                               SB Forms JS                               * *-->
 	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<script src="<?=base_url('assets/next/js/sb-forms-latest.js')?>"></script>
+	<!-- <script src="<?=base_url('assets/next/js/sb-forms-latest.js')?>"></script> -->
 </body>
 
 </html>

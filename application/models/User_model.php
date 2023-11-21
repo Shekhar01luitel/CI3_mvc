@@ -7,27 +7,27 @@ class User_model extends CI_Model
 		$this->load->database();
 	}
 
-	public function get_all_users() 
+	public function get_all_users()
 	{
 		$query = $this->db->get('users');
-		return $query->result(); 
+		return $query->result();
 	}
 	public function get_user()
 	{
-		$this->db->where('role','4');
+		$this->db->where('role', '4');
 		$query = $this->db->get('users');
-		return $query->result(); 
+		return $query->result();
 	}
-	public function get_admin() 
+	public function get_admin()
 	{
-		$this->db->where('role','2');
+		$this->db->where('role', '2');
 		$query = $this->db->get('users');
 		return $query->result();
 	}
 	public function get_super_admin()
 	{
-		$this->db->where('role', '8'); 
-		$query = $this->db->get('users'); 
+		$this->db->where('role', '8');
+		$query = $this->db->get('users');
 		return $query->result();
 	}
 
@@ -64,6 +64,13 @@ class User_model extends CI_Model
 		$this->db->where('id', $user_id);
 		return $this->db->update('users', $data);
 	}
+
+	public function update_user_photo_path($user_id, $update_data)
+	{
+		$this->db->where('id', $user_id);
+		return $this->db->update('users', $update_data);
+	}
+
 
 	public function delete_user_by_id($user_id)
 	{

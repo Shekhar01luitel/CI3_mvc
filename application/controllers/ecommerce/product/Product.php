@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends MY_Controller
+class Product extends MY_Controller
 {
 	public function __construct()
 	{
@@ -32,7 +32,7 @@ class Dashboard extends MY_Controller
 		$this->load->view('parts/header', $head);
 		$this->load->view('ecommerce/parts/navbar', $navbar);
 		$this->load->view('ecommerce/parts/sidebar', $sidebar);
-        $this->load->view('ecommerce/dashboard/dashoard');
+        $this->load->view('ecommerce/product/attribute');
 		$this->load->view('parts/footer');
     }
 	
