@@ -22,3 +22,5 @@ $route['ecommerce/profile/password/(:num)'] = 'ecommerce/dashboard/profile/updat
 $route['ecommerce/profile/role/(:num)'] = 'ecommerce/dashboard/profile/update_role/$1';
 
 $route['ecommerce/catalog/products']= 'ecommerce/product/product';
+$route['ecommerce/catalog/attributes']= 'ecommerce/attributes/Attributes';
+$route['ecommerce/catalog/categories']= 'ecommerce/categories/categories';

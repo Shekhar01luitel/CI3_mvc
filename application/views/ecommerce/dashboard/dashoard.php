@@ -1,7 +1,6 @@
 <div class="container-fluid" style="margin-top: 7rem !important">
+    <?php include(APPPATH . 'views/ecommerce/partials/alertMsg.php') ?>
     <style>
-      
-
         .product-card {
             border: 1px solid #ddd;
             border-radius: 8px;

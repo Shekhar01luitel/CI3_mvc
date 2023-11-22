@@ -4,7 +4,7 @@
 
         <div class="container-fluid mt-5">
             <h2 class="mb-4">New Product Page</h2>
-            <form method="post" action="/submit-product">
+            <form method="post" action="<?=base_url('ecommerce/product/product/submit_product')?>" enctype="multipart/form-data">
                 <fieldset class="border p-4">
                     <legend class="w-auto">Product Information:</legend>
                     <div class="form-group row">
@@ -69,7 +69,7 @@
                         <label for="weight" class="col-sm-2 col-form-label">Weight lbs</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="weightSelector" name="weightSelector" onchange="toggleWeightInput()">
-                                <option value="no_weight">No Weight</option>
+                                <option>No Weight</option>
                                 <option value="manual">Manual Input</option>
                             </select>
                             <input id="manualWeightInput" type="text" class="form-control" id="weight" name="weight" style="display:none;">
@@ -79,8 +79,8 @@
                     <div class="form-group row">
                         <label for="categories" class="col-sm-2 col-form-label">Categories</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="categoriesSelector" name="categoriesSelector">
-                                <option value="category">Default</option>
+                            <select class="form-control" id="categories" name="categories">
+                                <option value="Default">Default</option>
                             </select>
                         </div>
                     </div>
