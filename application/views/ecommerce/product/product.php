@@ -4,7 +4,7 @@
 
         <div class="container-fluid mt-5">
             <h2 class="mb-4">New Product Page</h2>
-            <form method="post" action="<?=base_url('ecommerce/product/product/submit_product')?>" enctype="multipart/form-data">
+            <form method="post" action="<?= base_url('ecommerce/product/product/submit_product') ?>" enctype="multipart/form-data">
                 <fieldset class="border p-4">
                     <legend class="w-auto">Product Information:</legend>
                     <div class="form-group row">
@@ -128,13 +128,11 @@
                 }
             }
 
-            // Function to fetch country data from the REST Countries API
             async function fetchCountries() {
                 try {
                     const response = await fetch('https://restcountries.com/v3.1/all');
                     const countries = await response.json();
 
-                    // Populate the dropdown with country names and codes
                     const countryDropdown = document.getElementById('countryOfManufacture');
                     countries.forEach(country => {
                         const option = document.createElement('option');
@@ -151,4 +149,47 @@
             fetchCountries();
         </script>
 
+    </div>
+    <div>
+        <table id="example" class="table table-striped" style="width:100%">
+            <?php
+            foreach ($product_list as $value) {
+                print_r($value);
+            }
+            ?>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Photo</th>
+                    <th>Product Status</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>From</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($product_list as $value) {
+                    print_r($value->id);
+                ?>
+                    <tr>
+                        <td><?= $value->product_name ?></td>
+                        <td>
+                            <img class="rounded-circle" name="showImage" id="showImage" style="width: 75px; height: 75px;" src="<?= base_url('assets/product_image/' . $value->photo) ?>" alt="">
+                        </td>
+                        <td><?= $value->enable_product ?></td>
+                        <td>RS <?= $value->price ?></td>
+                        <td><?= $value->quantity ?></td>
+                        <td><?= $value->country_of_manufacture ?></td>
+                        <td>
+                            <div>
+                                <button type="button" class="btn btn-primary">Edit</button></td>
+                            </div>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
     </div>

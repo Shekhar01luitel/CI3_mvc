@@ -17,7 +17,8 @@ class Product extends MY_Controller
         $head = array();
         $navbar = array();
         $sidebar = array();
-
+        $product = array();
+        $product['product_list'] = $this->Product_model->get_all_product();
         $head['title'] = 'Ecommerce-Dashboard';
         $navbar['data'] = ['cart', 'user', 'logout'];
         $sidebar['menu'] = [
@@ -34,7 +35,7 @@ class Product extends MY_Controller
         $this->load->view('parts/header', $head);
         $this->load->view('ecommerce/parts/navbar', $navbar);
         $this->load->view('ecommerce/parts/sidebar', $sidebar);
-        $this->load->view('ecommerce/product/product');
+        $this->load->view('ecommerce/product/product', $product);
         $this->load->view('parts/footer');
     }
 
@@ -59,9 +60,10 @@ class Product extends MY_Controller
             $this->session->set_flashdata('message', $error_message);
             redirect(base_url('ecommerce/dashboard'));
         } else {
+            
             $photo_file = $this->product_image($this->input->post('sku', true));
             $data = array(
-                'enable_product' => $this->input->post('productName', true),
+                'enable_product' => $this->input->post('enableProduct', true),
                 'attribute_set' => $this->input->post('attributeSet', true),
 
                 'product_name' => $this->input->post('productName', true),
@@ -78,32 +80,32 @@ class Product extends MY_Controller
                 'photo' => $photo_file,
 
             );
-
             $this->Product_model->insert_product($data);
 
             // Set success message
-            $success_message = 'Product updated successfully.';
+            $success_message = 'Product created successfully.';
             $this->session->set_flashdata('success', $success_message);
             redirect(base_url('ecommerce/dashboard'));
         }
     }
     public function product_image($file)
     {
+       
         // Handle file upload securely
         $config['upload_path'] = FCPATH . 'assets/product_image/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['max_size'] = 2048; // 2MB
         $config['file_name'] = $file . '_' . time(); // Set the file name
+        $config['file_name'] = str_replace(" ", "_", $config['file_name']);
 
         $this->load->library('upload', $config);
-
-        // Perform the file upload
+        
         if ($this->upload->do_upload('photo')) {
-            // File upload success, return the file name
             return $this->upload->data('file_name');
         } else {
-            // File upload failed, return false
-            return false;
+            $error_message = 'Product update failed.' . $this->upload->display_errors();
+            $this->session->set_flashdata('message', $error_message);
+            redirect(base_url('ecommerce/dashboard'));
         }
     }
 
