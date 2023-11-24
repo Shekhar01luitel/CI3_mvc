@@ -1,5 +1,4 @@
 <div class="container-fluid" style="margin-top: 7rem !important">
-    <?php include(APPPATH . 'views/ecommerce/partials/alertMsg.php') ?>
     <style>
         .product-card {
             border: 1px solid #ddd;
@@ -26,6 +25,7 @@
     <?php
     ?>
     <div class="container">
+    <?php include(APPPATH . 'viws/ecommerce/partials/alertMsg.php') ?>
         <div class="row">
             <?php
             $counter = 0;

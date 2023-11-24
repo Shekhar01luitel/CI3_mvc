@@ -5,7 +5,6 @@ class Product_model extends CI_Model
 {
     public function insert_product($data)
     {
-        // Insert data into the 'products' table
         $this->db->insert('products', $data);
     }
     public function get_all_product()
@@ -22,5 +21,9 @@ class Product_model extends CI_Model
     {
         $this->db->limit($limit, $offset);
         return $this->db->get('products')->result();
+    }
+    public function edit_product($data)
+    {
+        $this->db->insert('products', $data);
     }
 }

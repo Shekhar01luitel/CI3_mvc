@@ -24,3 +24,4 @@ $route['ecommerce/profile/role/(:num)'] = 'ecommerce/dashboard/profile/update_ro
 $route['ecommerce/catalog/products']= 'ecommerce/product/product';
 $route['ecommerce/catalog/attributes']= 'ecommerce/attributes/Attributes';
 $route['ecommerce/catalog/categories']= 'ecommerce/categories/categories';
+$route['ecommerce/product/product/edit_product/(:num)'] = 'ecommerce/product/product/edit_product/$1';
